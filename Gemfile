@@ -11,3 +11,5 @@ gem 'rubocop-performance', '~> 1.21', require: false
 gem 'sorbet', group: :development
 gem 'sorbet-runtime'
 gem 'tapioca', require: false, group: %i[development test]
+
+gem "colorize", "~> 1.1"

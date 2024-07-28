@@ -1,17 +1,3 @@
 {
     "sorbet.enabled": true,
-    
-    "sorbet.lspConfigs": [{
-    "id": "stable",
-    "name": "Sorbet",
-    "description": "Stable Sorbet Ruby IDE features",
-    "cwd": "${workspaceFolder}",
-    "command": [
-      "bundle",
-      "exec",
-      "srb",
-      "typecheck",
-      "--lsp"
-    ]
-}]
 }
