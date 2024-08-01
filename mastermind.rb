@@ -1,7 +1,8 @@
 # typed: true
 
 require_relative 'lib/input'
-require_relative 'lib/game'
+require_relative 'lib/user_game'
+require_relative 'lib/com_game'
 
 # Run this file to start the program
 class Mastermind
@@ -15,7 +16,7 @@ class Mastermind
   end
 
   def self.start_new_game
-    mastermind_game = Game.new
+    mastermind_game = (Input.confirmation?('Play as code breaker? [y/n]: ')) ? UserGame.new : COMGame.new
     mastermind_game.start_game
 
     # Game loop

@@ -1,11 +1,14 @@
-# typed: true
+# typed: false
 
-require 'colorize'
 require_relative 'peg'
+require 'colorize'
+require 'sorbet-runtime'
 
 # Represents a game of mastermind
-class Game
-  @@COLOR_SELECTION = %i[r o y g b p]
+class UserGame
+  extend T::Sig
+
+  @@COLOR_SELECTION = %i[r o y g b p] # rubocop:disable Naming/VariableName,Style/ClassVars
 
   attr_accessor :round_number, :feedback, :code, :guess
 
@@ -33,20 +36,23 @@ class Game
 
   def take_guess # rubocop:disable Metrics/AbcSize
     increment_round_number
-    reset_feedback_markers
+    reset_board
     puts
 
+    # Get guess from user and check validity
+    guess = T.let([], T::Array[String])
     loop do
       print "Guess #{round_number}: "
-      self.guess = gets.chomp.downcase.chars
-      break if verify_guess
+      guess = gets.chomp.downcase.chars
+      break if verify_guess(guess)
     end
 
+    # Convert colors to pegs
     self.guess = guess.map { |color| Peg.new(color.to_sym) }
   end
 
-  def verify_guess
-    guess.each { |color| return false unless Game.color_selection.include?(color.to_sym) }
+  def verify_guess(guess)
+    guess.each { |color| return false unless UserGame.color_selection.include?(color.to_sym) }
     return false unless guess.size == 4
 
     true
@@ -123,8 +129,15 @@ class Game
     @feedback[:partial] += 1
   end
 
-  def reset_feedback_markers
+  def reset_board
     @feedback[:correct] = 0
     @feedback[:partial] = 0
+
+    reset_pegs(code)
+    reset_pegs(guess)
+  end
+
+  def reset_pegs(peg_array)
+    peg_array.each(&:reset)
   end
 end

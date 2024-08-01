@@ -15,5 +15,4 @@ class Peg
   def reset
     @accounted_for = false
   end
-
 end

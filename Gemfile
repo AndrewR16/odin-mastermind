@@ -12,4 +12,4 @@ gem 'sorbet', group: :development
 gem 'sorbet-runtime'
 gem 'tapioca', require: false, group: %i[development test]
 
-gem "colorize", "~> 1.1"
+gem 'colorize', '~> 1.1'

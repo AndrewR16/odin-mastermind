@@ -12,6 +12,8 @@ require: rubocop-performance
 
 AllCops:
   NewCops: enable
+  Exclude: 
+  - 'sorbet/**/*'
 
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
