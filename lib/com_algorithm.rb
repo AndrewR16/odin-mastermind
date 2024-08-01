@@ -2,6 +2,8 @@
 
 require_relative 'com_game'
 
+# An adaptation of the algorithm created by Donald Knuth in 1977. Does not use the minimax technique to chose guesses.
+# https://en.wikipedia.org/wiki/Mastermind_(board_game)#Worst_case:_Five-guess_algorithm
 class COMAlgorithm
   attr_accessor :possible_codes, :guess, :feedback
 
