@@ -107,6 +107,7 @@ class UserGame
 
     if round_number == 12
       puts "\nYou Lose\n"
+      puts "Code: #{code.map(&:color).join}"
       return true
     end
 
